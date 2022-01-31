@@ -78,12 +78,26 @@ dayBefore = today - 2 # 2 days backdated.
 
 class(today - dayBefore) # class type - difftime
 
-# lubridate
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
+# lubridate - we do not have to depend on strp symbols to convert the char to date
+# Only works for dates and not time
+# dmy / dym / myd / mdy / ymd / ydm
+
+o1 = "03/Jan/2018"
+o2 = "18/Jan/01"
+o3 = "December/01/01"
+  
+o1_d = lubridate::dmy(o1)
+o1_d
+
+o2_d = lubridate::ymd(o2)
+o2_d
+
+o3_d = lubridate::mdy(o3)
+o3_d
+
+
+o4 = "This is the 4 of the Feb in the year 2000"
+o4_d = lubridate::dmy(o4)
+o4_d
+
+
