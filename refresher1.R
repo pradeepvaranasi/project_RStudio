@@ -18,9 +18,19 @@ obj6 = 3123121L
 objT = TRUE
 objF = FALSE
 
+# Packages ---------------------------------------------------
+
 # Functions - helps in re-usability - Systems function and User defined functions
 # Package is a list of functions that can be written in C/C++/Java/R. R has more packages than Python
-# 
+
+# ** Important libraries
+# Data Manipulation: dplyr, reshape, data.table
+# Visualization: ggplot2, plotly
+# Modelling: caret, h20.ai
+# Typecasting: lubridate
+
+# Type casting ---------------------------------------------------
+
 # Objects: Every object has certain function that are dependent on the class of the object 
 #
 # ** Typecasting: It is dynamic problem which depends on the business problems/scenarios e.g: Income Vs. ZIP 
@@ -47,7 +57,7 @@ as.logical(x3) #TRUE
 x4 = 0
 as.logical(x4) #FALSE
 
-### 3. Can convert logical to String and Numeric* (*without information loss). For instance, 
+# 3. Can convert logical to String and Numeric* (*without information loss). For instance, 
 
 #e.g:1
 as.numeric(objT) #output - 1 
@@ -55,8 +65,20 @@ as.numeric(objT) #output - 1
 #e.g:2
 as.numeric(objF) #output - 0 
 
-# 
-# 
+
+# Dates ---------------------------------
+
+# as.Date(): Strp time - String parsing of time (set of symbols used to represent date components)
+
+today = Sys.Date() # Epoch time is the method through which OS remembers date and able to perform operations
+
+# Default origin date on R is '1970-01-01'; Hence it's important to identify year component when century is not mentioned. 50 could be 1950 or 2050.  
+
+dayBefore = today - 2 # 2 days backdated.  
+
+class(today - dayBefore) # class type - difftime
+
+# lubridate
 # 
 # 
 # 
