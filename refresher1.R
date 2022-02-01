@@ -88,7 +88,7 @@ o3 = "December/01/01"
   
 o1_d = lubridate::dmy(o1)
 o1_d
-
+ 
 o2_d = lubridate::ymd(o2)
 o2_d
 
