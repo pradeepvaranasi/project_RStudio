@@ -56,7 +56,54 @@ View(head(dplyr::mutate(store,
 View(head(dplyr::mutate(store, ProfitD = NULL, TaxPaid = NULL))) # can remove multiple columns
 
 
-View(head(store[,c(1,17,2:16)])) # rearraning the columns as per requirement
+View(head(store[,c(1,17,2:16)])) # rearranging the columns as per requirement
+
+
+#Filtering -------------
+
+# Choosing rows where Location is Delhi
+store[store$Location == "Delhi", ] # method 1
+subset(store, store$Location == "Delhi") # method 2
+dplyr::filter(store, store$Location == "Delhi")# method 3
+
+# Choosing rows where Location is Delhi or Kolkata
+store[store$Location == "Delhi" | store$Location == "Kolkata", ] # method 1
+subset(store, store$Location == "Delhi" | store$Location == "Kolkata") # method 2
+# However, for method 1 and 2, the respective rownames for store df are retained in the subset. E.g. 1,2,3(Del)...24,25,26(Kol)
+# To fix this issue, one must assign the rownames(store_subset) to NULL 
+dplyr::filter(store, store$Location == "Delhi" | store$Location == "Kolkata")# method 3
+#dplyr by default assigns sequential row numbers
+
+# Choosing rows where Location is Delhi or Kolkata and Columns - StoreCode, Location, StoreName
+View(store[(store$Location == "Delhi" | store$Location == "Kolkata"), c("StoreCode","Location","StoreName")]) # method 1
+subset(store, store$Location == "Delhi" | store$Location == "Kolkata", select = c("StoreCode","Location","StoreName")) # method 2
+dplyr::filter(store, store$Location == "Delhi" | store$Location == "Kolkata")[,c("StoreCode","Location","StoreName")]
+
+
+#Sorting -------------
+
+#By default the order is ascending. 
+
+store[order(store$OperatingCost),]
+
+View(dplyr::arrange(store, store$Location, desc(store$OperatingCost)))
+
+
+#Remove Duplicates --------------
+score = read.csv("D:/AI/Practise/R/project_RStudio/data/session4/Datasets/score.csv", sep = ",", header = T, stringsAsFactors = T)
+
+score[duplicated(score),]
+
+dplyr::distinct(score, Student, .keep_all = TRUE) # unique values based on Student column
+
+
+
+
+
+
+
+
+
 
 
 
