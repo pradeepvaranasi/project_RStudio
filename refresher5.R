@@ -16,7 +16,7 @@ library(plotly)
 # Trend: Line chart(ever increasing component on x-axis: price vs. time, score vs. no.of.overs, income vs. age etc) 
 # Comparison: Continuous vs. Continuous / Continuous vs. Categorical /  Categorical vs. Categorical
             # Continuous vs. Continuous: Multiple Line chart, Scatter Plot***, 
-            # Continuous vs. Categorical: Pie Chart, (Multivariate charts) Bar Chart e.g. location vs. sales, Dodged Bar Chart e.g. location vs. store type vs. sales, Facet Bar Chart
+            # Continuous vs. Categorical: Pie Chart, (Multivariate charts) Bar Chart e.g. location vs. sales, Dodge Bar Chart e.g. location vs. store type vs. sales, Facet Bar Chart
             # Categorical vs. Categorical: Cross-Freq table 
 # Composition: They just tell you the categories present in the data. E.g.: Pie chart
 
@@ -54,6 +54,92 @@ ylab(label = "Retention")
   
 
 # Histogram ---------------
+
+# Method 1: Base R - They mostly require vectors
+
+hist(df$OperatingCost, breaks = 7)
+
+# Method 2: ggplot2
+
+ggplot2::ggplot(data = df) + 
+  aes(x=OperatingCost) + 
+  geom_histogram(bins = 5, color="red", fill="sky blue")
+
+
+
+# Trend charts 
+  
+# Line Chart  ---------------
+
+# Method 1: Base R
+plot(df$OperatingCost, type = "b") # "l" for line, "p" for scatter plot and "b" for both 
+
+
+# Scatter Plot  --------------- 
+# num - num
+
+# Uni variate scatter plot 
+
+# Method 1: base R
+plot(df$OperatingCost)
+
+# Method 2: ggplot2, similar base R function, however need to mention the index
+index = 1:length(df$OperatingCost)
+ggplot2::qplot(x = index, y = df$OperatingCost, geom = "point", xlab = "index", ylab = "OC", main = "univariate scatter plot")
+
+
+# Bi variate scatter plot 
+
+# Method 1: base R
+plot(x = df$OperatingCost, y = df$TotalSales)
+
+# Method 2: ggplot2
+ggplot2::ggplot(data = df) + aes(x=OperatingCost, y=TotalSales) + geom_point()
+
+
+# Bar Chart  --------------- 
+
+# Uni variate 
+
+df1 = df %>% dplyr::group_by(StoreType) %>% dplyr::summarise(Freq =n())
+
+ggplot(data = df1) + 
+  aes(x = StoreType, y = Freq) + 
+  geom_bar(stat = "identity") #additional argument 
+
+# Bi variate 
+
+df2 = df %>% dplyr::group_by(Location) %>% dplyr::summarise(sumTS =sum(TotalSales))
+
+ggplot(data = df2) + 
+  aes(x = Location, y = sumTS) + 
+  geom_bar(stat = "identity") #additional argument 
+
+# Multi variate - Stacked / Dodge / Facet 
+# Creating an aggregated dataset using 3 columns (2 cat + 1 num)
+
+df3 = df %>% dplyr::group_by(Location, StoreType) %>% dplyr::summarise(sumTS =sum(TotalSales))
+
+# Stacked
+ggplot2::ggplot(data = df3) + aes(x=Location, y=sumTS, fill=StoreType) + geom_bar(stat = "identity")
+
+# Dodge
+ggplot2::ggplot(data = df3) + aes(x=Location, y=sumTS, fill=StoreType) + geom_bar(stat = "identity", position = "dodge")
+
+# Facet 
+ggplot2::ggplot(data = df3) + aes(x=Location, y=sumTS) + geom_bar(stat = "identity") + facet_grid(StoreType~.)
+# Col1~. -> cutting the y-axis; .~Col1 -> cutting the x-axis
+
+
+
+
+
+
+
+
+
+
+
 
 
 
