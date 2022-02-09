@@ -27,21 +27,45 @@ library(moments)
 # The mean of all the sample means will be equal to the mean of the population.
 
 # 3 sigma rule: We can get some information about area under the curve by using the stdev of a normal distribution
-# If we move 1sd above or below the mean, we will cover 68.2% of the data, 2sd above or below the mean, 95.4% and 3sd - 99.7%
+# If we move 1SD above or below the mean, we will cover 68.2% of the data, 2SD above or below the mean, 95.4% and 3SD - 99.7%
+
+# We convert the normal distribution into a standard normal distribution (Z-score = (value-mean)/SD) ; mean=0 and SD=1
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-# Inferential Statistics ---------------
+# Inferential Statistics
 # We draw inferences from the samples regarding the population and relations with the population
+
+# Hypothesis Testing --------------- 
+# we have multiple tests to compare: 
+# 1. population mean with the sample mean: Z-Test, t-Test
+# Z-test: to check if the difference between population mean and sample mean is statistically significant or not. 
+
+# Ho (Null hypothesis): x1 = x2 ; u = x 
+# H1 (Alternate hypothesis): x1 != x2; x1 < x2; x1 > x2
+
+# scenario 1: p-value < significance value = Reject null
+# scenario 2: p-value > significance value = Accept null
+
+# type1 error: Accepting null, when should have been rejected
+# type2 error: Rejecting null, when should have been accepted
+
+# We conduct Z-test when the sample size is more than 30 and SD of the population is known.  
+
+# t-test: Almost same as z-test but here we come up with t-distribution to come up with probabilities. Sample size (15-30) and SD unknown 
+# In programming languages R/Python no Z-tests are available cause t-tests will cover all the scenarios such as: 
+# sample size >= 30 ; population SD known = Z-test 
+# sample size >= 30 ; population SD not known = t-test
+# sample size < 30 ; population SD known = t-test
+# sample size < 30 ; population SD not known = t-test
+# Hence, Z-test becomes part of the t-test in the programming world. 
+
+# Dependent paired t-test (mean of sample1 = mean of sample2 or not) vs Independent t-test (mean of sample1 = mean of sample2 or not but the samples are independent and not paired)
+
+# 2. Hypothesized value with the sample mean
+# 3. Different sample means
+
+
+
+
+
