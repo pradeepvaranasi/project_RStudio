@@ -60,10 +60,15 @@ library(moments)
 # sample size < 30 ; population SD not known = t-test
 # Hence, Z-test becomes part of the t-test in the programming world. 
 
-# Dependent paired t-test (mean of sample1 = mean of sample2 or not) vs Independent t-test (mean of sample1 = mean of sample2 or not but the samples are independent and not paired)
+# Dependent paired t-test (mean of sample1 = mean of sample2 or not) - No. of values of both samples should be the same. 
+# E.g. weights of people before and after diet
+# vs Independent t-test (mean of sample1 = mean of sample2 or not but the samples are independent and not paired)  - No. of values of both samples should be ALMOST the same. 
+# E.g. comparing sugar prices in different cities.  
 
 # 2. Hypothesized value with the sample mean
 # 3. Different sample means
+
+# ANOVA
 
 
 
